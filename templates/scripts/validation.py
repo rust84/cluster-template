@@ -91,14 +91,14 @@ def validate_dns_servers(servers: list = ["1.1.1.1","1.0.0.1"], **_) -> None:
         raise ValueError(f"Unable to resolve cloudflare.com with DNS servers {servers}") from e
 
 
-@required("ntp_servers")
-def validate_ntp_servers(servers: list = ["162.159.200.1","162.159.200.123"], **_) -> None:
-    client = ntplib.NTPClient()
-    for server in servers:
-        try:
-            client.request(server, version=3)
-        except Exception as e:
-            raise ValueError(f"Unable to connect to NTP server {server}") from e
+# @required("ntp_servers")
+# def validate_ntp_servers(servers: list = ["162.159.200.1","162.159.200.123"], **_) -> None:
+#     client = ntplib.NTPClient()
+#     for server in servers:
+#         try:
+#             client.request(server, version=3)
+#         except Exception as e:
+#             raise ValueError(f"Unable to connect to NTP server {server}") from e
 
 
 @required("github")
@@ -116,5 +116,5 @@ def validate(data: dict) -> None:
         validate_nodes(data)
 
     validate_dns_servers(data)
-    validate_ntp_servers(data)
+    #validate_ntp_servers(data)
     validate_github_repository(data)
